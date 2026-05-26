@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;height:100vh">
+<canvas id="c" width="220" height="220"></canvas>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+// Background
+ctx.fillStyle = '#0a1a0a';
+ctx.beginPath();
+ctx.roundRect(0, 0, 220, 220, 24);
+ctx.fill();
+// Terminal prompt ">"
+ctx.fillStyle = '#00ff41';
+ctx.font = 'bold 140px monospace';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+ctx.fillText('>', 110, 105);
+// Download link
+c.toBlob(blob => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'devhunt-icon.png';
+  a.textContent = 'Download PNG';
+  a.style.cssText = 'color:#00ff41;font-size:20px;display:block;text-align:center;margin-top:20px;font-family:monospace';
+  document.body.appendChild(a);
+});
+</script>
+</body>
+</html>

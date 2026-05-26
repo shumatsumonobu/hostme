@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* === ターミナル風カラー変数 === */
+
+:root {
+  --raw-terminal-bg: #0a1a0a;
+  --raw-terminal-primary: #00ff41;
+  --raw-terminal-dim: #00ff4180;
+  --raw-terminal-border: #00ff4130;
+  --raw-terminal-accent: #00e5ff;
+}
+
+/* === Tailwind テーマトークン === */
+/* var() 参照にすることで、Tailwind が color-mix() を使いランタイム解決する */
+@theme {
+  --color-terminal-bg: var(--raw-terminal-bg);
+  --color-terminal-green: var(--raw-terminal-primary);
+  --color-terminal-dim: var(--raw-terminal-dim);
+  --color-terminal-border: var(--raw-terminal-border);
+  --color-terminal-accent: var(--raw-terminal-accent);
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+}
+
+body {
+  background: var(--raw-terminal-bg);
+  color: var(--raw-terminal-primary);
+  font-family: var(--font-mono);
+}
+
+/* カーソル点滅アニメーション */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* フェードイン */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in;
+}
+
+/* スクロールバー */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--raw-terminal-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--raw-terminal-border);
+  border-radius: 3px;
+}
+
+/* === LP用エフェクト === */
+
+/* CRTスキャンライン */
+.lp-scanline {
+  position: relative;
+}
+.lp-scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* グローテキスト */
+.glow-text {
+  text-shadow:
+    0 0 7px var(--raw-terminal-primary),
+    0 0 20px var(--raw-terminal-primary),
+    0 0 40px var(--raw-terminal-primary);
+}
+
+.glow-text-accent {
+  text-shadow:
+    0 0 7px var(--raw-terminal-accent),
+    0 0 20px var(--raw-terminal-accent);
+}
+
+/* 微フリッカー（CRT風） */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.97; }
+  94% { opacity: 1; }
+  97% { opacity: 0.98; }
+  98% { opacity: 1; }
+}
+
+.lp-flicker {
+  animation: flicker 4s infinite;
+}
+
+/* 脈動グロー（CTAボタン用） */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px color-mix(in srgb, var(--raw-terminal-primary) 20%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 25px color-mix(in srgb, var(--raw-terminal-primary) 40%, transparent);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* セクション区切り線（グロー付き） */
+.lp-divider {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--raw-terminal-border) 20%,
+    var(--raw-terminal-primary) 50%,
+    var(--raw-terminal-border) 80%,
+    transparent 100%
+  );
+  opacity: 0.3;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--raw-terminal-primary) 20%, transparent);
+}
+
+/* モーション軽減設定 */
+@media (prefers-reduced-motion: reduce) {
+  .lp-flicker {
+    animation: none;
+  }
+  .pulse-glow {
+    animation: none;
+  }
+}
