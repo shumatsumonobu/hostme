@@ -53,6 +53,15 @@ npm run cf:preview   # Cloudflare Workers ローカルプレビュー（同上�
 - **Terminal**: 全ページ共通のターミナル風コンテナ。`lang` propで `document.documentElement.lang` を動的設定
 - **TypingText / TypingSequence**: タイピングアニメーション。`onComplete` は `useRef` で保持（useEffect依存配列に入れない）
 
+## デザイン
+
+When building, restyling, auditing, or reviewing a screen, follow the design-discipline skill, and speak to me in Japanese, in です・ます form.
+
+- 見た目の決定は `.design/declaration.md`（色・書体・余白・角丸・テーマ数の宣言。置き場はスキルの既定）。まだ無いので、次に画面を触るとき `/design-discipline-init` を1回実行して作る（宣言は subject から導かれ、コードの既存値は照合されて違いが record に残る）。以後のセッションはそれを読んで作る
+- `src/app/globals.css` の CSS 変数は宣言の写し。宣言ができた後は、見た目の変更は宣言 → globals.css の順で行う
+- 画面ができたら `/design-discipline-inspect` で修理リストを出し、`/design-discipline-fix` で消化する
+- スキル本体は `.claude/skills/design-discipline/`（エントリは init / review / inspect / fix の4つ）。隣の `frontend-design` は配色・書体の判断層で、無いと design-discipline が動かないので消さない
+
 ## Constraints
 
 - **next.config.js は CJS 必須** — ESM(.ts)だと Turbopack がパニックする

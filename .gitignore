@@ -41,7 +41,13 @@ yarn-error.log*
 .wrangler/
 
 # claude code
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/settings.json
+
+# design-discipline
+.design/captures/
+.design/harness/
 
 # local work memo
 WIP.md
