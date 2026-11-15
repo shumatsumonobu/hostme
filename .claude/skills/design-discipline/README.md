@@ -41,9 +41,12 @@ in the `/` menu and defer to the skill beside them:
 
 ```text
 ~/.claude/skills/   or   .claude/skills/
-    design-discipline/           SKILL.md, README.md, NOTICE, and rules/ —
+    design-discipline/           SKILL.md, README.md, NOTICE, reviewer.md, rules/ —
                                  tokens, layout, anti-slop, states, navigation,
-                                 motion, copy, forms, assets, a11y, review
+                                 motion, copy, forms, assets, a11y, charts, review —
+                                 runner/web/, the script that takes a web
+                                 product's counts on the rendered screen, and
+                                 images/, which brings a screen its picture
     design-discipline-init/      the declaration: derive, agree, write — once per project
     design-discipline-review/    improve an existing screen, from named deficits
     design-discipline-inspect/   run every applicable count and check, return the repair list
@@ -52,8 +55,9 @@ in the `/` menu and defer to the skill beside them:
 ```
 
 `rules/` stays inside the skill. A project's `.claude/rules/` is a different mechanism, and
-nothing here belongs in it. Nothing else is needed — a skill is a plain directory, there is no
-plugin to install, and edits to `SKILL.md` apply without restarting the session.
+nothing here belongs in it. On a web product, `inspect` and `fix` also need Node 22 or later and
+Chrome on the machine, for the runner. Nothing else is needed — a skill is a plain directory,
+there is no plugin to install, and edits to `SKILL.md` apply without restarting the session.
 
 The skill fires when Claude Code matches the work to its description; to make it fire every time,
 and to keep a long run in your language, give the project's `CLAUDE.md` one line:
@@ -65,6 +69,8 @@ When building, restyling, auditing, or reviewing a screen, follow the design-dis
 The language and its form go in this line because `CLAUDE.md` is read on every turn. The
 skill's own rule on them is read once, when a run starts, and an hour of tool calls buries it:
 one long run drifted into English without the line, and another dropped the polite form.
+Runs with the line have still written a few progress lines in English, each one saying what the
+session will do next.
 
 ## What it does
 
@@ -103,7 +109,7 @@ subject — code or no code — shows it beside what the code carries, and write
 Three questions, each asked once. A brief can answer any of them in advance.
 
 - **A browser, when the session has none.** The reference study before a visual direction needs
-  pixels. `init` asks whether one can be connected; going on without one records the study as
+  pixels. `init` asks whether one can be connected; going on without one writes the study into the declaration as
   not yet done, and its count in `rules/anti-slop.md` stays open until it is done.
 - **The declaration.** `init` shows the derived values beside what the code carries and asks
   whether they stand and where the file should live. A value the code carries is kept by
@@ -118,8 +124,8 @@ Three questions, each asked once. A brief can answer any of them in advance.
   answer but report only. Under every answer, the skill leaves alone what the product relies on
   behind the screen — a screen's address, the name a form sends a value under, wording the brief
   marks as fixed by law or a contract, anything else the product depends on that a reader never
-  sees — and lists any repair that would change one in `.design/record.md`; to allow it, write
-  that into the declaration on the line the note names. A fresh build is never asked.
+  sees — and tells you of any repair that would change one when it ends; to allow it, write
+  that into the declaration on the line it names. A fresh build is never asked.
 
 `SKILL.md` carries the three questions as they are put, under What it asks you.
 

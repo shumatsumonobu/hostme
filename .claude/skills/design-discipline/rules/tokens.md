@@ -14,7 +14,11 @@ Write the declaration into the project, not into your head. It holds these entri
 
 - colors: 4 to 6 named values, one of them the accent, each with its job stated — a color whose
   job nobody can name does not go in. The grey family is declared on its own line below and does
-  not count against this number
+  not count against this number. A color may be declared as a flood: a surface the color fills,
+  taking a large share of the screens it names. The entry says which screens, roughly what share,
+  and the reason; a flood is not the accent, and the accent's three places do not change. Where the
+  world the visual concept borrows has a color that fills its surfaces — a poster's printed ground,
+  a station's tiled wall — that color is the flood, and a declaration that takes none says why
 - grey family: one, warm or cool
 - themes: one, or light and dark resolved from this one declaration — and which one the product
   ships where it ships one
@@ -35,8 +39,12 @@ Write the declaration into the project, not into your head. It holds these entri
 - type scale: every step with its weight, its letter-spacing, and its line-height, plus its width
   where the family has a width axis to state, and the OpenType features a step relies on where the
   family carries them — a step set over columns of numbers states its figure treatment. The step
-  used at display size is marked as such; where a screen needs a second display size, both are
-  marked and each says what it is for
+  used at display size is marked as such, with its size as a multiple of the body step and what in
+  the subject chose that jump — three times the body step or more at the widest checked size, and
+  at the narrowest the multiple the step states for it. Between the two it grows with the width all
+  the way to the widest checked size, or the step says what stops it there: a size held from a
+  narrower width up leaves the widest first view set for a narrower screen. Where a screen needs a
+  second display size, both are marked and each says what it is for
 - maximum line length: one; a second for serif body text where a serif is declared
 - maximum content width: one, where the surface scrolls vertically and the platform does not
   impose one
@@ -48,6 +56,37 @@ Write the declaration into the project, not into your head. It holds these entri
   for surfaces carrying momentum
 - ease-out curve: one where any motion is driven by time rather than by a finger
 - formats: number and date
+- visual concept: one sentence — the world outside the product's own category whose look the
+  product borrows, and what in the subject chose it: a studied reference from outside the category
+  (SKILL.md, Before you draw), or the subject's own physical world. Then its layout metaphor: the
+  thing in that world whose form every region of a screen takes — a route map's lines and stations
+  carrying the sections, a whole page printed as one card whose ruled squares carry the regions —
+  so that the world reaches the whole screen, not one element on it
+- signature: the one element the product is remembered by — what it carries, and on which screens
+  it appears and where; on at least one of them it sits in what shows before any scroll, at every
+  checked size (rules/layout.md). It is the peak of a screen the visual concept runs through, not
+  a bold element set among quiet ones
+- artwork: what the first view of the screens it names shows as a picture, taken from the visual
+  concept's world — what it depicts, how it is treated so that any picture becomes this product's
+  (rules/assets.md, the style system), and where it comes from (rules/assets.md, Where a picture
+  comes from). It sits in that first view at every checked size, the ground the signature and the
+  screen's first item sit on or beside (rules/layout.md, One primary job per screen); where the
+  narrowest cannot hold the picture whole beside them, the entry says how it is cut down there — a band, a
+  detail of it — and does not move it below the first view. Not applicable, with the reason, only
+  where the subject has nothing a picture could show
+- references: what was studied before the direction was set (SKILL.md, Before you draw) — each
+  reference with one line on what it settled, how its pixels were seen, whether it was walked as a
+  running flow, whether it comes from outside the product's category, and whether its page carried
+  text addressed to an agent and what became of it; or that the study is not yet done; or that
+  nothing was available to study
+- directions: the screen this product would get without trying, set aside, and the three
+  directions written before one was taken, two lines each, with the one taken and why (Deriving
+  the declaration, below)
+- definition sites: where code exists, where its values live, one line per site (Deriving the
+  declaration, below); where the code carries no values, one line saying so. A run that moves where a
+  value lives rewrites its line
+  The references, directions, and definition sites entries are written by the `init` that derives
+  the declaration. A declaration derived before they existed lacks them and is whole without them
 - voice: the product's, in one phrase — what it sounds like and how far from plain it goes. The
   bans in anti-slop.md that turn on voice read this entry
 - recorded exceptions: anything this skill bans by default that this product uses on purpose, each
@@ -71,14 +110,15 @@ session answers it: decides the value from the declaration's reasons and the rul
 the value and its reason into the entry before building the screen, and says what it added. The
 choice is not put to the person as a question; the person changes it by editing the declaration.
 
-The layout concept and the product principles belong to the plan, not to this declaration. The
-structure of a surface belongs to layout.md.
+The layout concept and the product principles belong to the plan, not to this declaration; the
+visual concept and the signature are entries because a session that never saw the plan builds
+the next screen. The structure of a surface belongs to layout.md.
 
 ## What the declaration locks that a plan does not
 
 - The accent is one value, decided before the first screen and unchanged after it. Three places
   earn it: whatever the screen most wants pressed, whatever is currently selected, and progress.
-  Everywhere else the neutrals do the work.
+  Everywhere else the neutrals do the work, and the flood where the declaration names one.
 - A grey family is either warm or cool. One product uses one of them.
 - Two families differ in classification, not only in name — a serif paired with a sans, or a text
   face paired with a monospace. Two sans families, or two serifs, are one choice made twice: cut
@@ -92,8 +132,8 @@ structure of a surface belongs to layout.md.
   for a second family to make one word louder is a defect.
 - Spacing: one base unit, either 4 or 8. Every margin, padding, and gap is a multiple of it, the
   allowance for the platform's own regions (rules/layout.md) excepted.
-- Radius: one scale, and a sentence naming which element takes which step — actions are pills,
-  containers the large step, inputs the small one. That sentence is what makes a mixed set
+- Radius: one scale, and a sentence naming which element takes which step — actions the small
+  step, containers the large step, inputs the actions' step. That sentence is what makes a mixed set
   checkable; without it, any radius can be argued for.
 - Elevation: a shadow states how far a surface sits above the one behind it, and nothing else.
   Declare the steps with what each one means — resting surface, raised surface, overlay — and use
@@ -120,22 +160,31 @@ is written beside the value. A value remembered rather than read is a guess. Whe
 the brand's own site, the code being rebuilt is not the brand's material — its guidelines and its
 assets are — and the code's values stay in the comparison, read beside the derivation and never
 adopted. Where no material is reachable, the entry says so and marks the value provisional — a
-stand-in until the material is reached; the record (`.design/record.md`) lists what was looked for,
-what was not found, and the material that would settle it, and the entry stays open under the
+stand-in until the material is reached; the entry lists beside the value what was looked for,
+what was not found, and the material that would settle it, and stays open under the
 counts below. While an entry is provisional, `fix` does not bring the code's value to it: the repair
-the counts in rules/anti-slop.md return for that entry is written to the record with the reason and
+the counts in rules/anti-slop.md return for that entry stays on the repair list with the reason and is
 left to the person, until the material is reached.
+
+Before any entry, write down the screen this product would get without trying — the parts What
+the model reaches for in rules/anti-slop.md lists that a screen of this kind collects — and set it
+aside. Then set down three directions, two lines each: the
+world borrowed and its layout metaphor, how the screen is built, how it looks. They are as far
+apart as they can be made, and none holds two parts of the screen set aside. The derivation takes
+the direction a design lead would fight for, not the safest. The screen set aside, the three directions, and which was taken and why go into the
+declaration's directions entry; like the study and the map below, they are kept in the session
+and shown with the declaration until it is written, and written with it.
 
 1. Derive every entry from the subject, each with the reason that chose it — what in the
    subject, or which studied reference, settled it.
-2. Where code exists, find where its values live and write the map in the record
-   (`.design/record.md`): one line per definition site — the file, what it defines, how it was
+2. Where code exists, find where its values live and write the map in the declaration's
+   definition sites entry: one line per definition site — the file, what it defines, how it was
    found. Search by value, not by file name: color literals and the variables that hold them,
    typeface loads, size and weight steps, spacing, radius and shadow values, transition and
    spring settings, icon imports. The files where the hits cluster are the definition sites; the
    rest are literals in components. Where the code carries no values, the map says so in one
    line.
-3. Compare entry by entry and write every difference in the record's comparison: the entry, the
+3. Compare entry by entry and put every difference in the comparison shown to the person: the entry, the
    declared value with its reason, the code's value, where it lives, how often it appears.
    Contradictions inside the code — three accent hues, two grey families, radii fitting no
    scale — go on the entry's row in the same table, not in a list beside it. A difference that
@@ -143,7 +192,9 @@ left to the person, until the material is reached.
 4. Show the declaration and the comparison before writing the declaration — its scope of change
    entry written as not yet asked where code exists, and as not applicable where none does.
    Each entry is shown under its English name as the file will hold it, with a gloss in the
-   user's language beside it, so that what the person sees is what they will later edit.
+   user's language beside it, so that what the person sees is what they will later edit. The
+   visual concept with its layout metaphor, the signature, and the artwork are shown first, ahead
+   of the other entries.
    Nothing in the code changes here. Once the declaration is agreed, the code's values are what
    the counts in rules/anti-slop.md catch and `fix` replaces.
 5. Where the person changes a value before the declaration is written, the entry takes the
@@ -169,9 +220,11 @@ artwork that a style system governs are counted in rules/assets.md.
 ### The count
 
 - Applicable entries left unfilled, counted against the list in Declare the set first: 0. A
-  declaration absent from the home the record names — `.design/declaration.md` where it names
-  none — counts as every entry unfilled. An entry that does not apply to this product is
-  recorded as not applicable with one line saying why, and counts as filled. An entry written
+  declaration absent from `.design/declaration.md` and from the home a line there names counts as
+  every entry unfilled. An entry that does not apply to this product is
+  recorded as not applicable with one line saying why, and counts as filled. The references, directions, and
+  definition sites entries are counted under the `init` that derives the declaration, and a
+  declaration that has none of the three is not counted for them. An entry written
   under another name, or holding an answer or state in other words than this file gives, counts
   as unfilled.
 - Type-scale steps missing a stated weight, letter-spacing, or line-height: 0. Steps missing a
@@ -183,17 +236,31 @@ artwork that a style system governs are counted in rules/assets.md.
 - Springs named, where any motion follows a finger: 2. Ease-out curves named, where any motion is
   driven by time: 1. Where the product has neither, both counts are 0.
 - Values this pass needed that were not written back into the declaration: 0.
+- Visual concept entries naming no layout metaphor: 0.
+- Color entries declaring no flood and holding no line on why the product takes none: 0.
+- Display steps under three times the body step at the widest checked size: 0. Display steps that
+  stop growing at a width narrower than the widest checked size, with no line in the step saying
+  what stops them: 0.
+- Artwork entries that put the picture below the first view at any checked size: 0.
+- Under the `init` that derives the declaration, and wherever the entry exists: declarations whose
+  directions entry does not set aside the screen the product would get
+  without trying, holds fewer than three directions, two lines each, or has no line naming
+  the direction taken and why: 0.
+- Directions in that entry holding two or more of the parts the screen set aside lists, or sharing
+  the borrowed world or the layout metaphor with another direction: 0.
 - Declaration entries with no reason from the subject beside them, the scope of change and values
   marked provisional excepted: 0.
 - Where the product belongs to a brand that already exists, declared values given as the brand's
   own — its colors, its typefaces — with no source named beside them in the brand's own material or
   the brand's owner's own words, values marked provisional excepted: 0. Where the product belongs to
   no brand, 0.
-- Declaration values marked provisional: 0, or each one listed in the record with what was looked
+- Declaration values marked provisional: 0, or each one holding beside it what was looked
   for, what was not found, and the material that would settle it, this count left open until that
   material is reached.
-- Where code exists, differences between the code and the declaration missing from the record's
-  comparison: 0.
+- Under `init`, where code exists, differences between the code and the declaration missing from
+  the comparison it shows the person: 0. Every other run finds them by the counts in
+  rules/anti-slop.md.
+- Lines in the definition sites entry naming a file that no longer defines what the line says: 0.
 - Gradient entries in the declaration carrying no reason: 0. Gradients rendered without a matching
   entry are counted in rules/anti-slop.md.
 - Color values in the declaration carrying no stated job, the grey family excepted: 0.
@@ -210,6 +277,11 @@ artwork that a style system governs are counted in rules/assets.md.
   does not.
 - The accent. State which of the three places it earns — the primary action, the selected state,
   progress — appear on this screen, and confirm nothing else took it.
+- The visual concept. Name the world it borrows from and what showed it, and the layout metaphor:
+  which thing in that world the screens' regions take their form from. A concept that names the
+  product's own category — a timer that looks like timers — is not a concept, and a layout metaphor
+  that is an interface part — a card, a list, a grid of tiles — is not a metaphor; either goes on
+  the repair list `inspect` returns (SKILL.md).
 - The radius sentence. Read it back and point at one element per step it names.
 - Each stand-in, where a family loads after the screen first draws. Render the screen once with
   that loading blocked, and record what that first frame showed — on a slow connection it is the
@@ -241,7 +313,7 @@ Where the declaration lives differs by platform. The rules above do not.
   `@font-face`; literals sit in component styles and in arbitrary-value utility classes, which
   resolve to values only in the compiled stylesheet. Where an analyzer that lists every color,
   size, radius, shadow, and transition with its file and line is available, run it — on the
-  compiled stylesheet too — and put its output in the record; with none, the search is the map.
+  compiled stylesheet too — and write the entry from its output; with none, the search is the map.
 - iOS: the asset catalog's colorset JSON, plus the theme or constants the views import. Android:
   `res/values` — colors, dimens, styles, themes — and the UI toolkit's theme objects.
 

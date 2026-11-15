@@ -53,7 +53,7 @@ Where the product belongs to a brand that already exists, the wording the brand 
 name, its tagline — read from the brand's own material or the brand's owner's own words is a fact on
 the same terms as its colors and typefaces (rules/tokens.md); such a claim is not empty. Where
 neither the brief nor the product's material supplies what a claim would say, the session writes no
-claim: the string names the job the claim would fill and the record lists it as missing from the
+claim: the string names the job the claim would fill and the run's last message lists it as missing from the
 brief, the same way Facts the brief did not supply, below, lists a missing fact.
 
 ## Said once
@@ -74,7 +74,7 @@ rendered two ways in one product is the defect this catches.
 
 A fact a string needs — a time, a price, a count, a name — that neither the brief nor the
 product's data supplies is not invented. The string names the job the fact would fill, and the
-record lists the fact as missing from the brief.
+run's last message lists the fact as missing from the brief.
 
 ## Translation
 
@@ -100,11 +100,19 @@ drawn around it — in a column of links, in running text — wraps with its tex
 
 A line breaks where its language breaks it. No line opens with a mark that belongs to the line
 before — a closing bracket, a closing quotation mark, a comma, a full stop — and no title,
-heading, or name set over more than one line ends on a last line of one character. Both come more
+heading, or name set over more than one line, and no short text standing on its own — a lead, a
+claim, a caption, three lines or fewer — ends on a last line of one character, punctuation not
+counted: 「…案内しま / す。」 is one. Both come more
 from the data than from the design: a name with a bracket in it can become one word no break may
 enter, and a narrow width then breaks it wherever it must. So both are read under the longest real
 values the product shows — its longest name, title, label — at the width of every checked size
 (rules/layout.md).
+
+A title, a heading, or a name set over more than one line breaks between words, never inside one.
+Where the language sets no spaces between words, the break falls between phrases — 「きょうを /
+はじめる」, not 「きょうをはじ / める」. A change of size or column moves the break as much as
+the text does, so it is read the same way: under the longest real values, at the width of every
+checked size.
 
 ## Inspection
 
@@ -123,7 +131,7 @@ text are counted in anti-slop.md, including the exception. Run that count in the
   string carrying nothing the first did not: 0.
 - Claims — strings saying what this product is, does, has, or gives — that name nothing of this
   product's, titles and section labels and the brand's own wording excepted: 0.
-- Claims the brief did not supply that the record does not list as missing, counting none already
+- Claims the brief did not supply that the run does not list for the person as missing, counting none already
   counted on the line above, a claim carrying a fact — a figure, a name — belonging to the facts
   counts below: 0.
 - Filler tokens: 0.
@@ -137,7 +145,7 @@ text are counted in anti-slop.md, including the exception. Run that count in the
 - Numeric and date strings assembled by hand rather than produced by a locale formatter: 0.
 - Quantities of the same kind rendered in two different formats: 0.
 - Reader-visible facts — a time, a price, a count, a name — with no source in the brief or the
-  product's data: 0. Facts the brief lacks that the record does not list as missing: 0.
+  product's data: 0. Facts the brief lacks that the run does not list for the person as missing: 0.
 - Layouts that break under the longest translation on hand, or under source strings padded by
   the states.md multiple: 0.
 - Labels of controls with a shape drawn around them — buttons, tabs, links in a navigation or a
@@ -147,7 +155,10 @@ text are counted in anti-slop.md, including the exception. Run that count in the
   count above test the layout, not this line.
 - Lines opening with a closing bracket, a closing quotation mark, or punctuation that belongs to
   the line before, under the longest real values at the width of every checked size: 0.
-- Titles, headings, and names whose last line holds one character, under the same values: 0.
+- Titles, headings, names, and short text standing on its own — three lines or fewer — whose last
+  line holds one character, punctuation not counted, under the same values: 0.
+- Titles, headings, and names set over more than one line with a break inside a word — inside a
+  phrase, where the language sets no spaces between words — under the same values: 0.
 - Sentences assembled by joining fragments rather than built from whole strings and
   placeholders: 0.
 - Action strings absent from the lexicon: 0.
@@ -179,5 +190,8 @@ text are counted in anti-slop.md, including the exception. Run that count in the
   set the closing bracket alone. A zero-width space before the opening bracket, added where the
   value is rendered, gives the break a place. `text-wrap: balance` evens a title's lines and falls
   back to the ordinary break where unsupported; `line-break: strict` keeps closing marks off a
-  line's start in Japanese. Lines are read by measuring each character's box with a Range and
-  grouping the boxes by their top.
+  line's start in Japanese.
+- Web: `word-break: auto-phrase` keeps a break out of a Japanese phrase, from Chrome 119 and only
+  where the element declares `lang="ja"`; elsewhere the ordinary break stands. `word-break:
+  keep-all` allows no break inside Chinese, Japanese, or Korean text, and a `<wbr>` between two
+  phrases then gives the line its place to break.

@@ -69,7 +69,7 @@ shortest height a reader meets there — where a browser or the system keeps bar
 display, the height with them showing; where the operating system scales the display, the window
 that scaling leaves. A window the brief, the product's data, or the person names joins the set.
 The set goes into the structure, each size with its reason; where the structure holds none yet, a
-run reads at the set this paragraph gives, writes the set it used into the record, and the entry
+run reads at the set this paragraph gives, says the set it used as it works, and the entry
 goes on the repair list. This file's counts on a rendered surface are read at every checked size;
 every other rule that reads one at a size says which.
 
@@ -86,10 +86,29 @@ A screen for scanning many items packs tightly. A screen asking for one decision
 decision room. One density imposed across a whole product makes half its screens wrong, so density
 is decided per screen and the reason is the screen's job.
 
+## A table keeps its heads and its ends
+
+A table is read across a row and down a column, and two things break it first. A column head that
+wraps stops reading as one name. And on a narrow display, a table wider than the view scrolls the
+row's name or the control that acts on it out of sight, leaving values with no row they belong to,
+or a row with no way to act on it. Heads stay on one line — a shorter word, a narrower column
+elsewhere. At the narrowest checked size the column that names the row and the column that acts on
+it stay in view: the row restacked as a labelled block, or the first column held while the rest
+scrolls.
+
 ## Reflow is declared, not discovered
 
 Every region states what it does as the display narrows: wraps, stacks, hides, or scrolls
 sideways. Undeclared is the defect, the same way an undeclared overflow behavior is in states.md.
+
+The structure also states what the surface does with the width a wide display gives past one
+column: a region set beside another, the content or the signature grown into the room, or a flood
+or artwork the declaration names carried across it. Text still keeps its line length; the width
+goes to regions, not to longer lines. The maximum content width and the maximum line length stop
+text; neither is a reason to leave the rest of the display bare. A column in the middle of a wide
+display with bare background either side is a default that arrives unasked, counted in
+rules/anti-slop.md, and a sentence in the structure does not lift it; the recorded exceptions
+entry does, as for every default.
 
 Hiding is a real option and the one most often taken by accident. A region declared as hiding says
 what a reader on the narrow display loses and where they can still reach it.
@@ -99,7 +118,27 @@ what a reader on the narrow display loses and where they can still reach it.
 - One control carries the primary style. A screen that only presents carries none.
 - Reading order matches visual weight. List the elements in the order they are meant to be read,
   then list the same elements ordered by size, weight, and contrast. Where the two lists disagree,
-  the styling changes, not the content.
+  the styling changes, not the content — the styling of what is neither the signature, the primary
+  action, nor the artwork: on a screen its entry names, the signature stands in both lists where
+  its entry places it (rules/tokens.md), and keeps the size, color, and weight its entry and the
+  type scale give it. The artwork the declaration names (rules/tokens.md) is in
+  neither list: a picture is seen whole before anything on the screen is read, and it is the ground
+  the read elements sit on or beside. It is meant to draw the eye first; the reading order starts
+  after it. It keeps the room, the size, and the strength — its ink, its contrast, its color — that
+  its entry and the style system (rules/assets.md) give it, whatever else a repair settles; only
+  the narrowest checked size cuts it down (rules/tokens.md, the artwork entry). Where it crowds the
+  first element meant to be read, the composition changes — the element set on or against the
+  picture, on a ground of its own — and the picture does not.
+- The first view holds what the screen is for. At every checked size, in the state the reader
+  meets most — the populated one, wherever the screen shows the reader's own data — what shows
+  before any scroll includes the first item of what the screen exists to show or take — a list's
+  first row, a form's first field, a record's name and main figure — whole, with the control that
+  acts on it where there is one. The structure entry names that item and that state for each
+  screen. Where the narrowest checked size cannot hold the item beside the signature and the
+  artwork, everything else in the first view moves below or narrows first — what names the product
+  narrows and stays at the top — and the picture is then cut
+  down by what is still missing, and keeps its subject in the cut (rules/tokens.md, the artwork
+  entry); the item and the signature stay.
 - Where the primary action sits needs a reason. On a surface operated by touch that reason is
   reach; on one operated by a pointer it is scan order. Both are reasons. Neither is a default.
 - Every state of the screen holds this hierarchy. None of them promotes a different element to
@@ -118,8 +157,12 @@ are counted in anti-slop.md. Run that count in the same pass.
   and a footer of link columns, a bento grid, three tiers, alternating image-and-text sections,
   every block in a card — since those are the ones that arrive unasked.
 - Surfaces whose rendering differs from their declared structure — the columns and their gap or
-  what stops the width, the arrangement, what each region does as the display narrows: 0.
+  what stops the width, the arrangement, what each region does as the display narrows, what the
+  surface does as it widens: 0.
 - Regions with no declared reflow behavior: 0.
+- Surfaces whose structure does not say what the width past one column carries at the widest
+  checked size — a region beside another, the content or the signature grown into it, or a flood
+  or artwork the declaration names across it: 0.
 - Structures with no checked sizes, or with a checked size that has no height or no reason beside
   it: 0.
 - Checked sizes taken from a device's full display where readers are left less of it — a
@@ -129,15 +172,35 @@ are counted in anti-slop.md. Run that count in the same pass.
 - Groups whose internal gap is equal to or larger than the gap separating them from their
   neighbors: 0.
 - Controls styled as primary: 1 per screen, or 0 on screens that only present.
+- Screens whose first view, at any checked size and in the state the reader meets most, does not
+  hold the first item of what the screen exists to show or take, whole, with the control that acts
+  on it where there is one: 0.
+- Structure entries that do not name, for each screen, the first item of what the screen exists to
+  show or take and the state the reader meets most, or that name a heading, a title, a summary, or
+  a count where the screen shows a collection or takes input: 0.
+- First views at the narrowest checked size where the picture is cut down while something other
+  than the first item and the signature could still move below or narrow, or cut so that its
+  subject no longer reads: 0.
+- Repairs listed or applied — to the code, the structure, the artwork entry, or the style system —
+  that make the artwork smaller, give it less room, cover more of it with what is set over it, or
+  print it lighter or with less contrast, whatever the reason given, the narrowest checked size's
+  cut-down excepted, and a repair a later repair has undone not counted: 0.
+- Repairs listed or applied — to the code, the signature entry, or the type scale — that make the
+  signature smaller, lighter, or lower in contrast on a screen its entry names, whatever the reason
+  given, except where the narrowest checked size cannot otherwise hold it beside the first item,
+  and a repair a later repair has undone not counted: 0.
 - State captures promoting a different element to primary than the structure names: 0.
 - Regions that hide on the narrow display with no stated alternative route to their content: 0.
+- Table column heads that wrap onto a second line at any checked size: 0.
+- Tables at the narrowest checked size where the column naming the row or the column acting on it
+  lies outside the view before any sideways scroll: 0.
 - Content or controls anchored to a display edge with no allowance for the platform's own regions,
   where the surface runs under them: 0. Where no supported device has such regions, 0.
 - Content the reader must read, or controls they must press, sitting under a platform's own region
   when the surface is scrolled to either end, at any supported width on any supported device,
   counting none already counted on the line above, an artwork's subject being rules/assets.md's: 0.
   Where no supported device has such regions, 0. Where no device with such regions, or its
-  simulator, can be driven, the record (`.design/record.md`) says the count was not taken; an
+  simulator, can be driven, the run says the count was not taken; an
   untaken count is not a pass.
 
 ### The checks

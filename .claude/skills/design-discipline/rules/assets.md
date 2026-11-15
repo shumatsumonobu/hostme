@@ -27,7 +27,8 @@ chose one.
   surface color the assets will sit on. Artwork composed against a surface it will never appear on
   comes back wrong at integration. A photograph the product ships as its own imagery is held to the
   same palette: its largest areas of color, read by reducing the image to its few largest areas,
-  are declared values — the ground, the subject, the light, each brought to the set — or the
+  are declared values — the ground, the subject, the light, each brought to the set by its hue,
+  its range from darkest to lightest kept as the source has it — or the
   declaration names that photograph as the source of the value it took.
 - **Light and texture.** The words themselves, not the intent: where the light comes from, how
   hard it is, whether anything is glossy. The same words carry into every asset in the set.
@@ -48,8 +49,9 @@ change between them.
 
 ## Composition answers to the layout
 
-Artwork under a headline leaves the headline's third of the frame empty, and which third is
-decided before the artwork is made rather than discovered afterwards.
+Where artwork and text share a frame, which sits in front and where the two cross is decided
+before the artwork is made rather than discovered afterwards. Text may cross artwork; its contrast
+is then read at the worst point under the text, as the contrast count in rules/states.md reads it.
 
 Subject matter follows the state it serves. Art for an empty surface is quiet — something at rest,
 not a scene in progress. Celebration reads through composition, an arc or a tilt, rather than
@@ -75,6 +77,22 @@ A product icon gets its own pass. Render it small — this skill's default is to
 pixels — and if the idea stops being legible there, the idea is too complicated rather than too
 small.
 
+## Where a picture comes from
+
+A picture the artwork entry asks for (rules/tokens.md) comes from the first of three sources
+that can be reached. Generated, where the session can reach an image generator. A photograph whose
+license lets anyone use it — public domain, CC0, CC BY, CC BY-SA — found in an open collection,
+where it cannot. None, where neither can be reached: the screen is built without it and the artwork entry
+says why. A photograph from a stock site is not taken.
+
+A found photograph shows the world the visual concept borrows, never the product's own premises,
+people, or product, which the reject list below keeps to the brief and the product's material.
+Whatever its source, a picture goes through the style system before it ships, so that a generated
+image and a found photograph read as one commission. A photograph carries its credit — its author,
+its license, and where it was found — on the screen that shows it, or on a credits screen that
+screen links to; a file beside every picture holds its source and the request or the search
+that brought it.
+
 ## When to reject
 
 Any one of these sends the asset back. None of them is a matter of taste.
@@ -90,6 +108,9 @@ Any one of these sends the asset back. None of them is a matter of taste.
 - It is loaded from a placeholder image service outside the project, or it is a depiction presented
   as this product's own — its premises, its people, its product, photographed or drawn — that
   neither the brief nor the product's own material supplied.
+- People rendered as the generator's default: one evened face, skin smoothed past texture, hands
+  or limbs that do not hold together, a body standing square in the middle of the frame, a sales
+  smile, crossed arms, a pointing finger, a laptop held up with a grin.
 - Stripped of the text around it, the depiction stops saying what it is. A device whose screen
   shows nothing and a product with no material is a placeholder wearing the subject's spot.
 
@@ -98,8 +119,8 @@ Any one of these sends the asset back. None of them is a matter of taste.
 This Inspection runs wherever the product carries artwork, generated, photographed, or drawn in
 code. Anything drawn to stand in for a thing the page talks about counts as artwork the product
 carries, however little of the thing it shows. A product using none skips it rather than failing
-it, and the skip is recorded: one line in the record naming what was surveyed and why nothing on
-it depicts a thing. An unrecorded skip is a failed Inspection, not a pass.
+it, and the skip is said as the run works: one line naming what was surveyed and why nothing on
+it depicts a thing. A skip not said is a failed Inspection, not a pass.
 
 ### The count
 
@@ -107,12 +128,23 @@ it depicts a thing. An unrecorded skip is a failed Inspection, not a pass.
 - Photographs the product ships as its own imagery whose largest areas of color, read by reducing
   the image to its few largest areas, are neither declared values nor the named source of one: 0.
 - Assets made before the style system was written: 0.
+- Artwork sharing a frame with text, with no line in the style system saying which
+  sits in front and where the two cross: 0.
 - Assets carrying baked-in text or a watermark: 0.
 - Assets not yet viewed in every theme the declaration names, on their real surface: 0.
 - Assets whose focal point sits under a control or whose subject sits under one of the platform's
   own regions, as rules/layout.md names them: 0.
 - Assets in one set carrying different padding: 0.
 - Depicted objects whose capture, cropped to the object alone, stops reading as their subject: 0.
+- Pictures the product ships with no file beside them holding their source and the request or
+  search that brought them: 0.
+- Pictures brought to the set with a narrower range from darkest to lightest than their source: 0.
+- Artwork entries whose screens ship no picture, with no line in the artwork entry naming each source
+  tried, the request or search sent, and what came back: 0.
+- Photographs shown with no credit naming the author, the license, and where they were found, on
+  their screen or a credits screen it links to: 0.
+- Photographs under a license other than public domain, CC0, CC BY, or CC BY-SA, or taken from a
+  stock site: 0.
 
 ### The checks
 
@@ -129,3 +161,8 @@ it depicts a thing. An unrecorded skip is a failed Inspection, not a pass.
 
 - Where a platform masks the product icon into its own shape, supply the square artwork without
   transparency and without pre-rounded corners, since the mask will cut whatever it is given.
+- This skill carries a tool for the picture: `images/fetch.mjs` in this skill's own directory, the
+  one that holds `rules/`. It generates where an image key is in the environment and finds a
+  photograph in Wikimedia Commons otherwise, writing the picture with its source and credit beside
+  it; its README, `images/README.md` there, says how. A session that reaches an image generator
+  another way uses that, and the file beside the picture says which.

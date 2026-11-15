@@ -5,7 +5,8 @@ becomes whatever the environment happens to render when nobody was looking. Five
 designed on every screen: loading, empty, first run, error, long content. A state that fell back
 to a default instead of being designed counts as missing.
 
-A state that cannot occur on a given screen is recorded as not applicable, with one line saying
+A state that cannot occur on a given screen is recorded as not applicable in that screen's
+structure entry (rules/layout.md), with one line saying
 why — a screen reading nothing has no loading state, a screen with no collection has no empty
 one. A recorded exemption counts as designed. An unrecorded absence counts as missing, and the
 difference between the two is whether anyone thought about it.
@@ -41,6 +42,22 @@ no.
 Rolling back in silence is worse than never having reflected the action at all, because by then the
 reader has moved on believing it happened. An action that cannot be undone is the exception, and it
 takes the determinate wait above instead of the immediate reflection.
+
+## What an action says it did
+
+Success is the answer, shown. A control that says its work is done — sent, saved, booked, on the
+list — says so because a request went out and its answer came back yes. One that prints success
+with no request behind it tells the reader something false, and the reader acts on it; a product
+whose back end does not exist yet says, in words, that the action is not connected yet.
+
+Where the screen itself shows the result — the row appears, the switch turns, the item is gone —
+that is the confirmation, and a transient message saying the same thing is noise over it. A
+transient message carries what the screen cannot show: a failure, an effect somewhere else or
+later, a way to undo.
+
+Deleting is the action a reader most needs a way back from. A deletion the product can reverse
+runs at once and offers to undo it for 5 to 10 seconds. One it cannot reverse keeps a
+confirmation, and the confirmation names what will be gone.
 
 ## Empty
 
@@ -234,13 +251,18 @@ shown a state of it.
   content that updates itself arriving, which is content arriving rather than a state change, and
   not the surface scrolling as a whole to bring a focused field into view, which rules/forms.md
   owns: 0. Loading ending is the skeleton count above. Read on the running screen as each state is
-  forced; where no screen can be driven, the record (`.design/record.md`) says the count was not
+  forced; where no screen can be driven, the run says the count was not
   taken; an untaken count is not a pass.
 - Full-screen indicators raised by an action that replaces part of a screen: 0.
 - Operations running past the three-second threshold with only an indefinite indicator: 0.
 - Reversible actions that wait for a round trip before changing visibly: 0.
 - Failed actions that roll back with nothing said about it: 0.
 - Failed submissions that discard what the reader entered: 0.
+- Success shown — a message, a mark, a changed label — with no request made and answered behind
+  it, read in the code that shows it: 0.
+- Transient messages that announce only a result the screen already shows: 0.
+- Deletions the product can reverse that offer no undo for 5 to 10 seconds, and deletions it cannot
+  reverse with no confirmation naming what goes: 0.
 - Fetches that wait for a transition to finish before starting: 0.
 - Empty-state elements carrying neither information nor an action: 0.
 - Empty states missing the line naming the cause, or the control that fills the container: 0.
@@ -253,22 +275,22 @@ shown a state of it.
 - Tap targets below the platform's stated minimum, measured as the area that answers a press: 0.
 - Controls where a press at the middle of the drawn control lands on something other than the
   control or what it contains — at every checked size in the screen's resting state, and in each
-  captured state at the sizes it was captured at: 0. Where no screen can be driven, the record
+  captured state at the sizes it was captured at: 0. Where no screen can be driven, the run
   says the count was not taken; an untaken count is not a pass.
 - Neighboring targets whose areas that answer a press overlap: 0.
 - Text contrast below 4.5 to 1 for body text and 3 to 1 for large text and non-text controls, in
   every theme the declaration names, and, over a background that moves or changes on its own, at
   its least favorable moment as Text over what moves reads it: 0. Both ratios are the minimum
-  level of the accessibility guidelines. Where such a background cannot be recorded, the record
+  level of the accessibility guidelines. Where such a background cannot be recorded, the run
   says the count was not taken for the text over it; an untaken count is not a pass.
 - Focus indicators that animate in rather than appearing at once, read on the running screen as
-  focus arrives: 0. Where no screen can be driven, the record says the count was not taken; an
+  focus arrives: 0. Where no screen can be driven, the run says the count was not taken; an
   untaken count is not a pass.
 - Hover treatments applied with no condition that the input can hover, where any supported device's
   primary input cannot hover: 0. Where every supported device's primary input can hover, 0.
 - Hover treatments that persist after a tap, on a device whose primary input cannot hover, counting
   none already counted on the line above: 0. Where every supported device's primary input can hover,
-  0. Where no touch screen can be driven, the record says the count was not taken; an untaken count
+  0. Where no touch screen can be driven, the run says the count was not taken; an untaken count
   is not a pass.
 - Disabled controls with no reason on the screen — neither words saying why, nor the state of what
   the control acts on showing it — a control disabled while its submission is in flight excepted,
@@ -299,10 +321,12 @@ shown a state of it.
 
 ## Platform notes
 
+- Web: the runner takes the counts here that a rendered page answers — the states forced, the
+  raised text, what a press lands on, contrast over what moves (rules/review.md, Platform notes).
+  The lines below are for the other platforms, and for what the runner does not take.
+
 Forcing the states:
 
-- Web: network throttling and request blocking in the browser developer tools; a fresh profile or
-  cleared site data for first run.
 - iOS: airplane mode or the network link conditioner in the simulator; erase all content on the
   simulator for first run.
 - Android: emulator network profiles and airplane mode; clear app storage for first run.
@@ -328,8 +352,6 @@ Switching themes:
 
 Enlarged text and the narrowest supported width:
 
-- Web: the browser's minimum font size or page zoom; the device toolbar or a resized window for
-  width.
 - iOS: Dynamic Type in the simulator's settings, one step or more above the default; the smallest
   supported device for width.
 - Android: Font size in system settings; Display size or a small-screen emulator profile for width.
@@ -347,22 +369,10 @@ Minimum tap target, as each platform states it:
 
 What a press lands on:
 
-- Web: `document.elementFromPoint` at a point returns what a press there lands on, and the press
-  lands on the control where the control `contains()` the result; the control is scrolled into view
-  first, since a point outside the viewport returns nothing. A query that finds a control by
-  its text or role starts inside the layer under test, since a layer behind it can hold an element
-  of the same kind. An area larger than the drawn shape is a pseudo-element around the control
-  that draws nothing; `pointer-events: none` lets a press pass through a box that should never
-  take one. A rotated element's box measures larger than its shape; a round one is read as a
-  circle.
+- Web: an area answering beyond the drawn shape is usually a pseudo-element around the control
+  that draws nothing, and `pointer-events: none` lets a press pass through a box that should never
+  take one.
 - iOS and Android: the view hierarchy's hit test at a point, in the platform's UI test tools.
-
-Text over what moves:
-
-- Web: hide the text by its color or its visibility, keeping every layer laid in to protect it,
-  capture frames through the cycle, and find in each text box the pixel whose lightness comes
-  closest to the text's; the ratio is that pixel against the text's color, a translucent text
-  color blended over it first.
 
 Hover, and what stands in for it:
 
