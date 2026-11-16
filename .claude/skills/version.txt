@@ -1,2 +1,2 @@
-design-discipline: shumatsumonobu/vitruvian-design b13cf49 (imported 2026-11-15)
+design-discipline: shumatsumonobu/vitruvian-design a998e49 (imported 2026-11-16)
 frontend-design: anthropics/skills 34040c9 (imported 2026-09-17)
